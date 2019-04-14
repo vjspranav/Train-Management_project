@@ -25,23 +25,32 @@ char* get_pass(){
     while (i<=9){
        str1[i]=getch();
        c=str1[i];
+       if(c==8){
+         i--;
+         printf("\b \b");
+       }else{
        if(c==13) break;
        else printf("*");
        i++;
     }
-    str1[i]='\0';
-    i=0;
-    printf("\nRe-enter the password [max length 10] : ");
-    while (i<=9){
-       str2[i]=getch();
-       c=str2[i];
-       if(c==13) break;
-       else printf("*");
-       i++;
+  }
+  str1[i]='\0';
+  i=0;
+  printf("\nRe-enter the password [max length 10] : ");
+  while (i<=9){
+    str2[i]=getch();
+    c=str2[i];
+    if(c==8){
+     i--;
+     printf("\b \b");
+    }else{
+    if(c==13) break;
+    else printf("*");
+    i++;
     }
-    str2[i]='\0';
-    i=0;
-
+  }
+  str2[i]='\0';
+  i=0;
   }while(strcmp(str1, str2) != 0);
   printf("\nPasswords Matched\n");
   return str1;
@@ -50,7 +59,7 @@ char* get_pass(){
 void user(){
   FILE *fptr;
   char fname[20], lname[20], uname[20], inpass[20], another = 'Y';
-  fptr = fopen("R:\\C\\TRAIN\\for pract\\users\\User.txt","a");
+  fptr = fopen("users\\User.txt","a");
   printf("Enter First name: ");
   scanf("%s",&fname);
   printf("Enter Last name: ");
@@ -66,7 +75,7 @@ char* login(){
   static char fname[20], defuname[20], uname[20], lname[20], defpass[20], pass[20] ;
   FILE *fptr;
   int d, n=0;
-  if ((fptr = fopen("R:\\C\\TRAIN\\for pract\\users\\User.txt","r")) == NULL){
+  if ((fptr = fopen("users\\User.txt","r")) == NULL){
     printf("Error! opening file");
        // Program exits if the file pointer returns NULL.
        exit(1);
@@ -77,11 +86,16 @@ char* login(){
   int i=0;
   printf("\nEnter the password [max length 10] : ");
   while (i<=9){
-     defpass[i]=getch();
-     c=defpass[i];
-     if(c==13) break;
-     else printf("*");
-     i++;
+    defpass[i]=getch();
+    c=defpass[i];
+    if(c==8){
+     i--;
+     printf("\b \b");
+    }else{
+    if(c==13) break;
+    else printf("*");
+    i++;
+    }
   }
   defpass[i]='\0';
   i=0;

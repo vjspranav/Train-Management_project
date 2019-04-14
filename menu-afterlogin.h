@@ -28,9 +28,9 @@ int arrow_afterlogin(int n){
   }
   if(ch2!=0){
     if(n<0){
-      n = 2;
+      n = 3;
     }
-    if(n>2){
+    if(n>3){
       n = 0;
     }
     system("CLS");
@@ -50,8 +50,12 @@ int menu_afterlogin(int n){
   else
     printf("   2. View specific train detils\n");
   if(n==2)
-    printf("-> 3. To return back to main menu \n");
+    printf("-> 3. Reserve a Ticket\n");
   else
-    printf("   3. To return back to main menu\n");
+    printf("   3. Reserve a Ticket\n");
+  if(n==3)
+    printf("-> 4. To return back to main menu \n");
+  else
+    printf("   4. To return back to main menu\n");
   arrow_afterlogin(n);
 }
