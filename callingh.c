@@ -12,7 +12,7 @@ void start(){
     system("CLS");
     start();
   }else if(n==1){
-    strcpy(a, "R:\\C\\TRAIN\\for pract\\users\\");
+    strcpy(a, "users\\");
     strcat(a, login());
     puts(a);
     FILE *fptr;
@@ -24,7 +24,8 @@ void start(){
   if(n==1){
     system("CLS");
     int m = menu_afterlogin(0);
-    if(m==2){
+    if(m==3){
+      system("CLS");
       start();
     }
   }
