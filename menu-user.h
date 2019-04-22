@@ -1,14 +1,10 @@
 #include<stdio.h>
-#include<conio.h>
+#include<conio.h> /*getch was necesarry*/
 #include<stdlib.h>
 
-int menu(int n);
+int menu(int n); /*The  Functions that creates the arrow based menu*/
 
-// int re(int n){
-//   return n;
-// }
-
-int arrow(int n){
+int arrow(int n){  /*The function that detects the arrow press and passes on the integer*/ 
   int ch1, ch2;
   ch1 = getch();
   ch2 = 0;
@@ -41,17 +37,18 @@ int arrow(int n){
 }
 
 int menu(int n){
+  printf("\t\tPlease Either sign up or login to contnue\n");
   if(n==0)
-    printf("-> 1. To Create user\n");
+    printf("\t\t-> 1. To Create user\n");
   else
-    printf("   1. To Create user\n");
+    printf("\t\t   1. To Create user\n");
   if(n==1)
-    printf("-> 2. To Login\n");
+    printf("\t\t-> 2. To Login\n");
   else
-    printf("   2. To Login\n");
+    printf("\t\t   2. To Login\n");
   if(n==2)
-    printf("-> 3. To Exit \n");
+    printf("\t\t-> 3. To Exit \n");
   else
-    printf("   3. To Exit\n");
+    printf("\t\t   3. To Exit\n");
   arrow(n);
 }

@@ -1,6 +1,4 @@
-Shatabdhi Pune Hyd 3A/2A/GN 20:20 10:20 18052
-Rajdhani Pune Delhi 3A/2A/1A/GN 22:30 10:00 12052
-Durontoo Bomb Allbd 3A/2A/SL 22:00 5:00 15063
-MMTS Hyd SCBD GN 13:00 16:00
-Shaty poi iop 3A/2A 10:50 20:30 20563
-jiop ji op 3A/2A 10:30 20:20 10256
+Shatabdhi Pune Hyd 3A/2A/GN 20:20 10:20 18052 1 1 0 0 1 0
+Rajdhani Pune Delhi 3A/2A/1A/GN 22:30 10:20 12052 1 1 1 0 1 0
+Durontoo Bomb Allbd 3A/2A/SL 22:10 5:50 15063 1 1 0 1 0 0
+MMTS Hyd SCBD GN 13:00 16:00 15064 0 0 0 0 1 0

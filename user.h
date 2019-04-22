@@ -39,9 +39,11 @@ char* get_pass(){
        str1[i]=getch();
        c=str1[i];
        if(c==8){
-         i--;
+         if(i>0){
          printf("\b \b");
-       }else{
+         i--;
+         }
+      }else{
        if(c==13) break;
        else printf("*");
        i++;
@@ -54,8 +56,10 @@ char* get_pass(){
     str2[i]=getch();
     c=str2[i];
     if(c==8){
-     i--;
-     printf("\b \b");
+      if(i>0){
+        i--;
+        printf("\b \b");
+      }
     }else{
     if(c==13) break;
     else printf("*");
@@ -104,6 +108,7 @@ void user(){
       fprintf(fptr,"%s %s %s %s\n",fname, lname, uname, pass);
       fclose(fptr);
       printf("The Details have been saved");
+      delay(2);
     }
   }else{
     printf("You've entered an already exisiting username more than 3 times\nPlease Try again");
@@ -128,11 +133,14 @@ char* login(){
   int i=0;
   printf("\nEnter the password [max length 10] : ");
   while (i<=9){
+    int g = i;
     defpass[i]=getch();
     c=defpass[i];
     if(c==8){
+     if(i>0){
      i--;
      printf("\b \b");
+    }
     }else{
     if(c==13) break;
     else printf("*");
@@ -145,9 +153,9 @@ char* login(){
   while(fscanf(fptr, "%s %s %s %s", &fname, &lname, &uname, &pass)!=EOF){
     if(strcmp(defuname, uname) ==0 && strcmp(defpass, pass) ==0){
 	    printf("\nWelcome %s %s Hope you have a good time with our reservation system\n", fname, lname);
-      for(d=0; d<=5; d++){
+      for(d=0; d<=3; d++){
         delay(1);
-        printf("\rRedirecting in %d", 5-d);
+        printf("\rRedirecting in %d", 3-d);
       }
       n=1;
       return defuname;
