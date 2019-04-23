@@ -8,7 +8,7 @@
 
 void start(){
   char a[100], b[20];
-  int n = menu(0), d;
+  int n = menu(0), d, inp_tr_num;
   switch(n){
     case 0:
       user();
@@ -36,6 +36,15 @@ void start(){
           system("CLS");
           start();
           break;
+        case 3:
+          system("CLS");
+          display_train_details();
+          printf("Please enter a train number: ");
+          scanf("%d", &inp_tr_num);
+          specific_train_details(inp_tr_num);
+          printf("\n\nPress any key to go to Main Menu..");
+          getch();
+        goto start;
         case 2:
           system("CLS");
           remove_train_details();
@@ -62,6 +71,15 @@ void start(){
           system("CLS");
           start();
           break;
+        case 1:
+          system("CLS");
+          display_train_details();
+          printf("Please enter a train number: ");
+          scanf("%d", &inp_tr_num);
+          specific_train_details(inp_tr_num);
+          printf("\n\nPress any key to go to Main Menu..");
+          getch();
+          goto start;
         case 0:
           system("CLS");
           display_train_details();

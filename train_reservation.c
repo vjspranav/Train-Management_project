@@ -99,7 +99,7 @@ void display_available_seats(char g_train_name[], char b[], char inp_class[], st
             printf("%d ", seats[i]);
       printf("\n\t     Upper: ");
       for(i=1; i<61; i++)
-        if((i-2)%6 == 0 || (i-4)%6==0)
+       if((i-2)%6 == 0 || (i-4)%6==0)
           if(seats[i]!=0)
             printf("%d ", seats[i]);
     }
@@ -112,26 +112,18 @@ void reserve_seat(){
   int train_num;
   char uname[20], class[10];
   struct date dt;
-  struct train a1;
   printf("Please enter a train number from above list: ");
   scanf("%d", &train_num);
   system("CLS");
-  while(fscanf(fptr1,"%s %s %s %s %d:%d %d:%d %d",  &a1.train_name, &a1.from_city, &a1.to_city, &a1.classstr, &a1.arrival.hour, &a1.arrival.min, &a1.departure.hour, &a1.departure.min, &a1.train_num)!=EOF)
-    if(train_num==a1.train_num){
-      fclose(fptr1);
-      break;
-    }
+  struct train t = return_train_details(train_num);
+  specific_train_details(t.train_num);
 
-
-}
+  }
 
 void main(){
   struct date a = {23, 10, 2019};
   // display_available_seats("Shatabdi", "Sourish", "3A", a);
   //printf("Date is : %02d/%02d/%d\n", cur_date().tm_mday, cur_date().tm_mon, cur_date().tm_year);
- specific_train_details(18052);
- specific_train_details(12052);
- specific_train_details(15063);
- specific_train_details(15064);
+  reserve_seat();
 
 }
