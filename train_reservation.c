@@ -135,29 +135,106 @@ void display_available_seats(char g_train_name[], char b[], char inp_class[], st
             if(seats[i]!=0)
               printf("%d ", seats[i]);
     }
-
-
-
   }
 
+int check_class(struct train t, char inp_class[]){
+  if(strcmp("3A", inp_class)==0){
+    if(!t.cls.A3)
+      return 1;
+  }else if(strcmp("2A", inp_class)==0){
+    if(!t.cls.A2)
+      return 1;
+  }else if(strcmp("1A", inp_class)==0){
+    if(!t.cls.A1)
+      return 1;
+  }else if(strcmp("SL", inp_class)==0){
+    if(!t.cls.SL)
+      return 1;
+  }else if(strcmp("GN", inp_class)==0){
+    if(!t.cls.GN)
+      return 1;
+  }else if(strcmp("CC", inp_class)==0){
+    if(!t.cls.CC)
+      return 1;
+  }
+}
+
+int is_seat_available(struct train t, char inp_class[], int inp_seat_no, struct date inp_date){
+  char a[100], train_name[20],  fname[20], uname[20], lname[20], pass[20], class[4];
+  int seat_no, train_num, k=0;
+  FILE* fptr;
+  fptr = fopen("users/User.txt", "r");
+  while(fscanf(fptr, "%s %s %s %s", &fname, &lname, &uname, &pass)!=EOF){
+    strcpy(a, "users\\");
+    strcat(a, uname);
+    FILE* user;
+    sprintf(a, "%s.txt", a);
+    user = fopen(a, "r");
+      while(fscanf(user, "%s %d %d %s %d %d %d", &train_name, &seat_no, &train_num, &class, &doj.day, &doj.month, &doj.year)!=EOF){
+        //printf("\n%d %d %d",strcmp(train_name, t.train_name), strcmp(class, inp_class), datecmp(inp_date, doj));
+        if(strcmp(train_name, t.train_name)==0 && strcmp(class, inp_class)==0 && datecmp(inp_date, doj)==0){
+          if(inp_seat_no==seat_no){
+            k=1;
+          }
+        }
+      }
+    }
+  if(k==1)
+    return 1;
+  else
+    return 0;
+}
+
 void reserve_seat(char uname[]){
-  char a[] = "users\\";
+  char a[] = "users\\", inp_class[20];
+  struct date dob;
   FILE *fptr1, *unamef;
   fptr1 = fopen("train_details.txt","r");
   strcat(a, uname);
   sprintf(a, "%s.txt", a);
   unamef = fopen(a, "a");
-  display_train_details();
-  int train_num;
+  display_train_details_r();
+  int train_num, seat_num;
   struct date dt;
   printf("Please enter a train number from above list: ");
   scanf("%d", &train_num);
   system("CLS");
   struct train t = return_train_details(train_num);
   specific_train_details(t.train_num);
-
+  inpclass:
+  printf("\nPlease Select the class in which you would like to book: ");
+  scanf("%s", &inp_class);
+  if(strcmp(inp_class, "3A")==0||strcmp(inp_class, "2A")==0||strcmp(inp_class, "1A")==0||strcmp(inp_class, "SL")==0||strcmp(inp_class, "GN")==0||strcmp(inp_class, "CC")==0){
+      if(check_class(t, inp_class)==1){
+        printf("The selected class is not available in this train please select a different class");
+        goto inpclass;
+      }
+  }else{
+    printf("Please enter a valid class");
+    goto inpclass;
   }
+  printf("\n");
+  inpdate:
+  printf("Please enter the date of travel in dd mm yyyy format: ");
+  scanf("%d %d %d", &dob.day, &dob.month, &dob.year);
+  if(dob.year<cur_date().tm_year || dob.year==cur_date().tm_year && (dob.day<cur_date().tm_mday && (dob.month==cur_date().tm_mon)) || dob.year==cur_date().tm_year && dob.month<cur_date().tm_mon){
+    printf("\nPlease enter a valid upcoming date");
+    goto inpdate;
+  }
+  display_available_seats(t.train_name, uname, inp_class, dob);
+  inpseatno:
+  printf("please enter a seat number from above: ");
+  scanf("%d", &seat_num);
+  if(is_seat_available(t, inp_class, seat_num, dob)==1){
+    printf("\nYou've selected an already reserved seat\n");
+    goto inpseatno;
+  }
+  printf("Your username: %s\nTrain name: %s\nClass: %s\tSeat No: %d\nTotal charge = ", uname, t.train_name, inp_class, seat_num);
+  fclose(fptr1);
+}
 
 void main(){
-  reserve_seat("vjspranav");
+//struct date a = {20, 10, 2019};
+reserve_seat("vjspranav");
+
 }
