@@ -99,7 +99,7 @@ void user(){
     scanf("%s",&uname);
     i--;
   }
-  if(i!=-1){
+  if(i!=0){
     char pass[20];
     strcpy(pass, get_pass());
     if(strcmp(pass,"tryagain")==0){

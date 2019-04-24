@@ -26,10 +26,15 @@ int datecmp(struct date a, struct date b){
 
 void display_available_seats(char g_train_name[], char b[], char inp_class[], struct date inp_date){
   int i, n, seats[100];
+
+  if(strcmp(inp_class, "1A")==0)
+    n=23;
   if(strcmp(inp_class, "2A")==0)
     n=61;
-  if(strcmp(inp_class, "3A")==0 || strcmp(inp_class, "GN")==0)
+  if(strcmp(inp_class, "3A")==0 || strcmp(inp_class, "GN")==0 || strcmp(inp_class, "SL")==0)
     n=81;
+  if(strcmp(inp_class, "CC")==0)
+    n=74;
   for(i=1; i<n; i++){
    seats[i] = i;
  }
@@ -54,8 +59,8 @@ void display_available_seats(char g_train_name[], char b[], char inp_class[], st
       }
       fclose(user);
     }
-    printf("\t\tAvailable Seats in class %s", inp_class);
-    if(strcmp(inp_class, "3A")==0 || strcmp(inp_class, "GN")==0){
+    printf("\n\t\tAvailable Seats in class %s", inp_class);
+    if(strcmp(inp_class, "3A")==0 || strcmp(inp_class, "GN")==0 || strcmp(inp_class, "SL")==0){
       printf("\n\tSide Lower: ");
       for(i=1; i<81; i++)
         if((i-7)%8==0)
@@ -102,15 +107,48 @@ void display_available_seats(char g_train_name[], char b[], char inp_class[], st
        if((i-2)%6 == 0 || (i-4)%6==0)
           if(seats[i]!=0)
             printf("%d ", seats[i]);
+    }else if(strcmp(inp_class, "1A")==0){
+      printf("\n\t     Lower: ");
+        for(i=1; i<23; i++)
+          if((i)%2 != 0)
+            if(seats[i]!=0)
+              printf("%d ", seats[i]);
+      printf("\n\t     Upper: ");
+        for(i=1; i<23; i++)
+           if((i)%2 == 0)
+            if(seats[i]!=0)
+              printf("%d ", seats[i]);
+    }else if(strcmp(inp_class, "CC")==0){
+      printf("\n\tWindow: ");
+        for(i=1; i<74; i++)
+          if((i-5)%5 == 0 || i==1 || i==73  || (i-4)%5==0)
+            if(seats[i]!=0)
+              printf("%d ", seats[i]);
+      printf("\n\tMiddle: ");
+        for(i=1; i<74; i++)
+          if((i-6)%5 ==0   && (i!=1 && i!=71))
+            if(seats[i]!=0)
+              printf("%d ", seats[i]);
+      printf("\n\tSide: ");
+        for(i=1; i<74; i++)
+          if(((i-3)%5 ==0 || i==2 || i==71 || (i-7)%5==0)  && (i!=1 && i!=73))
+            if(seats[i]!=0)
+              printf("%d ", seats[i]);
     }
+
+
+
   }
 
-void reserve_seat(){
-  FILE *fptr1;
+void reserve_seat(char uname[]){
+  char a[] = "users\\";
+  FILE *fptr1, *unamef;
   fptr1 = fopen("train_details.txt","r");
+  strcat(a, uname);
+  sprintf(a, "%s.txt", a);
+  unamef = fopen(a, "a");
   display_train_details();
   int train_num;
-  char uname[20], class[10];
   struct date dt;
   printf("Please enter a train number from above list: ");
   scanf("%d", &train_num);
@@ -121,9 +159,5 @@ void reserve_seat(){
   }
 
 void main(){
-  struct date a = {23, 10, 2019};
-  // display_available_seats("Shatabdi", "Sourish", "3A", a);
-  //printf("Date is : %02d/%02d/%d\n", cur_date().tm_mday, cur_date().tm_mon, cur_date().tm_year);
-  reserve_seat();
-
+  reserve_seat("vjspranav");
 }

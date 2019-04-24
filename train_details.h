@@ -104,6 +104,7 @@ void remove_train_details(){
 void specific_train_details(int i_train_num){
   int i = 0;
   struct train t = return_train_details(i_train_num);
+  system("CLS");
   printf("\n\t==========================================================");
   printf("\n\t| Train Name: %s\t Train Number: %d   \t\t |", t.train_name, t.train_num);
   printf("\n\t| From: %s\t\t To: %s \t\t\t |", t.from_city, t.to_city);
