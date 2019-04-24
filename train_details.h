@@ -68,14 +68,14 @@ void display_train_details(){
   int i = 1;
   FILE* fptr;
   fptr = fopen("train_details.txt","r");
-  printf("\t|------------------------------------------------------------------------------------------------------------|");
-  printf("\n\t|Sr.No\tTr.No\t\tName\t\tDestinations\t\tDeparture Time\t\tArrival Time\t     |\n");
-  printf("\t|------------------------------------------------------------------------------------------------------------|");
+  printf("\t|--------------------------------------------------------------------------------------------------------------------|");
+  printf("\n\t|Sr.No\tTr.No\t\tName\t\t\tDestinations\t\t\tDeparture Time\t\tArrival Time |\n");
+  printf("\t|--------------------------------------------------------------------------------------------------------------------|");
   while(fscanf(fptr,"%s %s %s %d:%d %d:%d %d %d %d %d %d %d %d",  &a.train_name, &a.from_city, &a.to_city, &a.arrival.hour, &a.arrival.min, &a.departure.hour, &a.departure.min, &a.train_num,  &a.cls.A3, &a.cls.A2, &a.cls.A1, &a.cls.SL, &a.cls.GN, &a.cls.CC)!=EOF){
-    printf("\n\t|%d.\t%d\t\t% 8s\t% 4s to %s\t\t%02d:%02d\t\t\t%02d:%02d\t\t     |",i, a.train_num, a.train_name, a.from_city, a.to_city, a.departure.hour, a.departure.min, a.arrival.hour, a.arrival.min?a.arrival.min:00);
+    printf("\n\t|%d.\t%d\t\t% 8s\t% 10s to % 10s\t\t%02d:%02d\t\t\t%02d:%02d\t     |",i, a.train_num, a.train_name, a.from_city, a.to_city, a.departure.hour, a.departure.min, a.arrival.hour, a.arrival.min?a.arrival.min:00);
     i++;
   }
-    printf("\n\t--------------------------------------------------------------------------------------------------------------\n\n");
+    printf("\n\t----------------------------------------------------------------------------------------------------------------------\n\n");
   fclose(fptr);
 }
 
