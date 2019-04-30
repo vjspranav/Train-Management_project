@@ -23,9 +23,9 @@ int arrow_adminlogin(int n){
   }
   if(ch2!=0){
     if(n<0){
-      n = 5;
+      n = 6;
     }
-    if(n>5){
+    if(n>6){
       n = 0;
     }
     system("CLS");
@@ -57,9 +57,12 @@ int menu_adminlogin(int n){
   else
     printf("   5. Reserve a Ticket\n");
   if(n==5)
-    printf("-> 6. To go to main menu \n");
+    printf("-> 6. To View ticket status\n");
   else
-    printf("   6. To go to main menu\n");
-
+    printf("   6. To View ticket status\n");
+  if(n==6)
+    printf("-> 7. To go to main menu \n");
+  else
+    printf("   7. To go to main menu\n");
   arrow_adminlogin(n);
 }

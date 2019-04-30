@@ -3,11 +3,11 @@
 #include "menu-user.h" /* Has functions for creating a menu before login */
 #include "menu-afterlogin.h" /* Same as above but after a user logs in*/
 #include "menu-adminlogin.h" /* For admin*/
-#include "train_details.h" /* Has the fucnctions that shows the details of a train, takes in new train details and removes already added trains */
-
+//#include "train_details.h" /* Has the fucnctions that shows the details of a train, takes in new train details and removes already added trains */
+#include "train_reservation.h"
 
 void start(){
-  char a[100], b[20];
+  char a[100], b[20], uname[20];
   int n = menu(0), d, inp_tr_num;
   switch(n){
     case 0:
@@ -18,10 +18,12 @@ void start(){
     case 1:
       strcpy(a, "users\\");
       strcpy(b, login());
+      strcpy(uname, b);
       strcat(a, b);
       FILE *fptr;
       sprintf(a, "%s.txt", a);
       fptr = fopen(a,"a");
+      fclose(fptr);
       break;
     default:  printf("Thank you for using");
   }
@@ -32,9 +34,19 @@ void start(){
       system("CLS");
       o = menu_adminlogin(0);
       switch(o){
-        case 5:
+        case 6:
           system("CLS");
           start();
+          break;
+        case 5:
+          system("CLS");
+          view_ticket_details(view_reserved_tickets(uname));
+          printf("\nPress enter to continue");
+          getch();
+          goto start;
+          break;
+        case 4:
+          reserve_seat(uname);
           break;
         case 3:
           system("CLS");
@@ -67,9 +79,20 @@ void start(){
       system("CLS");
       m = menu_afterlogin(0);
       switch(m){
-        case 3:
+        case 4:
           system("CLS");
           start();
+          break;
+        case 3:
+          system("CLS");
+          view_ticket_details(view_reserved_tickets(uname));
+          printf("\nPress enter to continue");
+          getch();
+          goto start;
+          break;
+        case 2:
+          reserve_seat(uname);
+          goto start;
           break;
         case 1:
           system("CLS");
@@ -80,6 +103,7 @@ void start(){
           printf("\n\nPress any key to go to Main Menu..");
           getch();
           goto start;
+          break;
         case 0:
           system("CLS");
           display_train_details();

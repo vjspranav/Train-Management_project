@@ -1,5 +1,8 @@
 Shatabdhi Pune Hyd 20:20 10:20 18052 1 1 0 0 1 0
 Rajdhani Pune Delhi 22:30 10:20 12052 1 1 1 0 0 0
-Durontoo Bomb Allbd 22:10 05:50 15063 1 1 0 1 0 0
+Durontoo Bomb Allbd 22:10 05:50 15063 1 1 0 0 0 0
 MMTS Hyd SCBD 13:00 16:00 15064 0 0 0 0 1 0
 Superxp Alhbd Bomb 20:50 10:30 20508 1 1 0 0 0 0
+Vaishali Delhi Barauni 17:15 19:50 12554 1 1 1 0 0 0
+HydExp Hyderabad Bombay 13:50 22:00 12203 1 1 0 0 0 0
+Supexp Pun Hyd 10:30 20:20 20523 1 0 0 0 1 0
